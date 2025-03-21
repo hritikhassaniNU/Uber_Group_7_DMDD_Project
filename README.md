@@ -8,7 +8,7 @@
   - [x] Unlimited disk space
 - [x] Create Table
 - [x] Insert Data
-- [x] Create views
+- [ ] Create views
 - [ ] Changes in Create Table (Add Sequence or Auto Increment for primary Key)
 - [ ] Recheck
   - [ ] Views 
