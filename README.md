@@ -2,12 +2,12 @@
 
 ## TODO
 
-- [x] Setting up **env**
-- [x] Different Roles Creation
-  - [x] Granting access to Roles
-  - [x] Unlimited disk space
-- [x] Create Table
-- [x] Insert Data
+- [ ] Setting up **env**
+- [ ] Different Roles Creation
+  - [ ] Granting access to Roles
+  - [ ] Unlimited disk space
+- [ ] Create Table
+- [ ] Insert Data
 - [ ] Create views
 - [ ] Changes in Create Table (Add Sequence or Auto Increment for primary Key)
 - [ ] Recheck
