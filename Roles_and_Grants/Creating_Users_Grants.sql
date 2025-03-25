@@ -2,7 +2,7 @@
 --This file is run by database or system administrator
 ------------------------------------------------------
 
--- Giving grants to Admin
+-- Giving grants to Application Admin
 GRANT CREATE USER, ALTER USER, DROP USER TO admin;
 
 -- The below lines would throw an error for the first time as the users wouldn't exist at the time of execution
