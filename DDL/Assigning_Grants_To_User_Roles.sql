@@ -200,4 +200,25 @@ GRANT SELECT ON Driver TO App_Customer;
 -- Allow App_Customer to make and view payment
 GRANT INSERT, SELECT ON Payment TO App_Customer;
 
+---------------------------------------
+-- CUSTOMER SUPPORT TEAM ROLE GRANTS
+---------------------------------------
+-- Allow Support_Team to read and update trip for dispute handling
+GRANT SELECT, UPDATE (trip_rating, feedback, cancellation_reason, updated_by) ON Trip TO Support_Team;
+
+-- Allow Support_Team to view trip status history
+GRANT SELECT ON Trip_Status TO Support_Team;
+
+-- Allow Support_Team to view customer info
+GRANT SELECT ON Customer TO Support_Team;
+
+---------------------------------------
+-- FLEET MANAGEMENT TEAM ROLE GRANTS
+---------------------------------------
+-- Allow Fleet_Management to view and update driver records
+GRANT SELECT, UPDATE (rating, phone_number, email, updated_by) ON Driver TO Fleet_Management;
+
+-- Allow Fleet_Management to monitor driver locations/status
+GRANT SELECT ON Driver_Status TO Fleet_Management;
+
 COMMIT;
