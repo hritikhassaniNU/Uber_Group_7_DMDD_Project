@@ -85,3 +85,36 @@ CREATE TABLE Driver (
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_by VARCHAR2(255) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
 );
+
+-- 7. Trip
+CREATE TABLE Trip (
+    trip_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id INTEGER NOT NULL,
+    ride_type_id INTEGER NOT NULL,
+    start_time DATE,
+    end_time DATE,
+    pickup_location VARCHAR2(100),
+    pickup_zipcode INTEGER NOT NULL,
+    dropoff_location VARCHAR2(100),
+    dropoff_zipcode INTEGER NOT NULL,
+    distance_miles NUMBER(5,2) CHECK (distance_miles >= 0),
+    base_fare NUMBER(4,2) CHECK (base_fare >= 0),
+    pricing_id INTEGER,
+    total_fare NUMBER(4,2) CHECK (total_fare >= 0),
+    payment_id INTEGER,
+    trip_rating NUMBER(2,1) CHECK (trip_rating BETWEEN 0 AND 5),
+    feedback VARCHAR2(400),
+    driver_rating NUMBER(2,1) CHECK (driver_rating BETWEEN 0 AND 5),
+    customer_rating NUMBER(2,1) CHECK (customer_rating BETWEEN 0 AND 5),
+    cancelled_at DATE,
+    cancelled_by VARCHAR2(50),
+    cancellation_reason VARCHAR2(400),
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER'),
+
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+    FOREIGN KEY (ride_type_id) REFERENCES Ride_Type(ride_type_id),
+    FOREIGN KEY (pricing_id) REFERENCES Surge_Pricing(surge_pricing_id),
+    FOREIGN KEY (payment_id) REFERENCES Payment(payment_id)
+);
