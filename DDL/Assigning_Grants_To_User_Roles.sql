@@ -177,4 +177,27 @@ GRANT SELECT ON Payment TO Uber_Driver;
 
 GRANT SELECT ON Vehicle TO Uber_Driver;
 
+
+------------------------------------
+-- APP CUSTOMER ROLE GRANTS
+-------------------------------------
+-- Allow App_Customer to book a trip (insert)
+GRANT INSERT ON Trip TO App_Customer;
+
+-- Allow App_Customer to manage their own customer data
+GRANT INSERT, UPDATE, SELECT ON Customer TO App_Customer;
+
+-- Allow App_Customer to cancel their ride
+GRANT UPDATE (cancelled_at, cancelled_by, cancellation_reason, updated_by, driver_rating,trip_rating) ON Trip TO App_Customer;
+
+-- Allow App_Customer to view trip and trip status history
+GRANT SELECT ON Trip TO App_Customer;
+GRANT SELECT ON Trip_Status TO App_Customer;
+
+-- Allow App_Customer to view driver info
+GRANT SELECT ON Driver TO App_Customer;
+
+-- Allow App_Customer to make and view payment
+GRANT INSERT, SELECT ON Payment TO App_Customer;
+
 COMMIT;
