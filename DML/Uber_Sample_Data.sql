@@ -204,7 +204,7 @@ VALUES (1, 1, TO_DATE('2025-03-23 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('
 INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_location, pickup_zipcode, dropoff_location, dropoff_zipcode, distance_miles, base_fare, pricing_id, total_fare, payment_id, 
                   trip_rating, feedback, driver_rating, customer_rating, cancelled_at, cancelled_by, cancellation_reason)
 VALUES (2, 2, TO_DATE('2025-03-24 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-24 08:00:00', 'YYYY-MM-DD HH24:MI:SS'), '200 Beacon St, Boston, MA', '02102', '300 Boylston St, Boston, MA', '02103', 6.25, 8.00, 2, 40.81, 2,
-  5.0, 'Driver canceled due to illness; communication was clear', 5.0, 5.0, TO_DATE('2025-03-24 07:30:00', 'YYYY-MM-DD HH24:MI:SS'),'Driver', 'Driver was ill');
+  5.0, 'Driver canceled due to illness; communication was clear', 2.9, 5.0, TO_DATE('2025-03-24 07:30:00', 'YYYY-MM-DD HH24:MI:SS'),'Driver', 'Driver was ill');
 
 INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_location, pickup_zipcode, dropoff_location, dropoff_zipcode, distance_miles, base_fare, pricing_id, total_fare, payment_id, 
                   trip_rating, feedback, driver_rating, customer_rating, cancelled_at, cancelled_by, cancellation_reason)
@@ -219,7 +219,7 @@ VALUES (4, 4, TO_DATE('2025-03-26 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('
 INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_location, pickup_zipcode, dropoff_location, dropoff_zipcode, distance_miles, base_fare, pricing_id, total_fare, payment_id, 
                   trip_rating, feedback, driver_rating, customer_rating, cancelled_at, cancelled_by, cancellation_reason)
 VALUES (5, 5, TO_DATE('2025-03-27 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-27 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), '120 Commonwealth Ave, Boston, MA', '02105', '85 Clarendon St, Boston, MA', '02106',
-  7.30, 8.90, 5, 21.89, 5, 3.0, 'Average ride, need for improvement', 3.5, 3.1, NULL, NULL, NULL);
+  7.30, 8.90, 5, 21.89, 5, 3.0, 'Average ride, need for improvement', 2.5, 3.1, NULL, NULL, NULL);
 
 INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_location, pickup_zipcode, dropoff_location, dropoff_zipcode, distance_miles, base_fare, pricing_id, total_fare, payment_id, 
                   trip_rating, feedback, driver_rating, customer_rating, cancelled_at, cancelled_by, cancellation_reason)
@@ -234,7 +234,7 @@ VALUES (7, 7, TO_DATE('2025-03-29 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('
 INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_location, pickup_zipcode, dropoff_location, dropoff_zipcode, distance_miles, base_fare, pricing_id, total_fare, payment_id, 
                   trip_rating, feedback, driver_rating, customer_rating, cancelled_at, cancelled_by, cancellation_reason)
 VALUES (8, 1, TO_DATE('2025-03-29 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-29 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), '80 Tremont St, Boston, MA', '02108', '90 Boylston St, Boston, MA', '02109',
-  4.25, 7.00, 8, 11.08, 8, 3.0, 'Ride was on time but vehicle could be cleaner', 3.0, 3.0, NULL, NULL, NULL);
+  4.25, 7.00, 8, 11.08, 8, 3.0, 'Ride was on time but vehicle could be cleaner', 3.9, 4.0, NULL, NULL, NULL);
 
 INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_location, pickup_zipcode, dropoff_location, dropoff_zipcode, distance_miles, base_fare, pricing_id, total_fare, payment_id, 
                   trip_rating, feedback, driver_rating, customer_rating, cancelled_at, cancelled_by, cancellation_reason)
@@ -244,7 +244,7 @@ VALUES (9, 7, TO_DATE('2025-03-30 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('
 INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_location, pickup_zipcode, dropoff_location, dropoff_zipcode, distance_miles, base_fare, pricing_id, total_fare, payment_id, 
                   trip_rating, feedback, driver_rating, customer_rating, cancelled_at, cancelled_by, cancellation_reason)
 VALUES (10, 5,TO_DATE('2025-03-30 15:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-30 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), '500 Massachusetts Ave, Boston, MA', '02110', '600 Cambridge St, Boston, MA', '02101', 6.00, 8.50, 10, 42.80, 10,
-  5.0, 'Customer canceled for a cheaper alternative', 5.0, 5.0, TO_DATE('2025-03-24 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Customer', 'Customer found cheaper ride');
+  5.0, 'Customer canceled for a cheaper alternative', 5.0, 3.7, TO_DATE('2025-03-24 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Customer', 'Customer found cheaper ride');
 
 -----------------------------------------------------------
 -- 8. Insert rows into Trip_Status
