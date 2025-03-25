@@ -58,3 +58,30 @@ CREATE TABLE Ride_Type (
     multiplier NUMBER(2,1)
 );
 
+-- 5. Surge_Pricing
+CREATE TABLE Surge_Pricing (
+    surge_pricing_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    surge_date DATE NOT NULL,
+    weekday_weekend VARCHAR2(10),
+    start_time DATE NOT NULL,
+    end_time DATE NOT NULL,
+    peak_off_peak NUMBER(1) CHECK (peak_off_peak IN (0, 1)),
+    multiplier NUMBER(2,1) NOT NULL CHECK (multiplier >= 1.0),
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+);
+
+-- 6. Driver
+CREATE TABLE Driver (
+    driver_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    first_name VARCHAR2(50) NOT NULL,
+    last_name VARCHAR2(50) NOT NULL,
+    email VARCHAR2(50) UNIQUE NOT NULL,
+    phone_number VARCHAR2(10) UNIQUE NOT NULL,
+    license_number VARCHAR2(10) UNIQUE NOT NULL,
+    rating NUMBER(2,1) CHECK (rating BETWEEN 0 AND 5),
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(255) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+);
