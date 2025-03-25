@@ -131,3 +131,32 @@ CREATE TABLE Trip_Status (
     FOREIGN KEY (status_id) REFERENCES Status_Master(status_id)
 );
 
+-- 9. Driver_Status
+CREATE TABLE Driver_Status (
+    driver_status_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    driver_id INTEGER NOT NULL,
+    status_id INTEGER NOT NULL,
+    current_location INTEGER NOT NULL,
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER'),
+
+    FOREIGN KEY (driver_id) REFERENCES Driver(driver_id),
+    FOREIGN KEY (status_id) REFERENCES Status_Master(status_id)
+);
+
+-- 10. Vehicle
+CREATE TABLE Vehicle (
+    vehicle_id INTEGER GENERATED ALWAYS AS IDENTITY ,
+    driver_id INTEGER NOT NULL,
+    ride_type_id INTEGER NOT NULL,
+    model VARCHAR2(20),
+    make VARCHAR2(20) NOT NULL,
+    year INTEGER NOT NULL,
+    license_plate_number VARCHAR2(10) UNIQUE NOT NULL,
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(255) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER'),
+    PRIMARY KEY (vehicle_id, ride_type_id),
+    FOREIGN KEY (driver_id) REFERENCES Driver(driver_id),
+    FOREIGN KEY (ride_type_id) REFERENCES Ride_Type(ride_type_id)
+);
