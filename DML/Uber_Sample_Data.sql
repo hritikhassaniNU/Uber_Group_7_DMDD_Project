@@ -246,3 +246,30 @@ INSERT INTO Trip (customer_id, ride_type_id, start_time, end_time, pickup_locati
 VALUES (10, 5,TO_DATE('2025-03-30 15:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-30 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), '500 Massachusetts Ave, Boston, MA', '02110', '600 Cambridge St, Boston, MA', '02101', 6.00, 8.50, 10, 42.80, 10,
   5.0, 'Customer canceled for a cheaper alternative', 5.0, 5.0, TO_DATE('2025-03-24 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Customer', 'Customer found cheaper ride');
 
+-----------------------------------------------------------
+-- 8. Insert rows into Trip_Status
+-----------------------------------------------------------
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (1, 1);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (2, 4);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (3, 3); 
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (4, 4);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (5, 1);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (6, 2);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (7, 4);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (8, 1);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (9, 3); 
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (10, 4); 
+
+-----------------------------------------------------------
+-- 9. Insert rows into Driver_Status
+-----------------------------------------------------------
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (1, 5, '02101');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (2, 3, '02102');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (3, 7, '02103');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (4, 8, '02104');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (5, 5, '02105');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (6, 6, '02106');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (7, 7, '02107');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (8, 8, '02108');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (9, 5, '02109');  
+INSERT INTO Driver_Status (driver_id, status_id, current_location) VALUES (10, 6, '02110'); 
