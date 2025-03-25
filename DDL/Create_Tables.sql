@@ -13,3 +13,12 @@ DROP TABLE Status_Master CASCADE CONSTRAINTS;
 
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR HH24:MI:SS';
 
+-- 1. Status_Master
+CREATE TABLE Status_Master (
+    status_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    status VARCHAR2(15) DEFAULT 'Offline'
+           CHECK (status IN ('Requested', 'completed', 'In Progress', 'cancelled', 'Available', 'Offline',
+               'On Trip','Suspended')),
+    status_type VARCHAR2(15) NOT NULL
+);
+
