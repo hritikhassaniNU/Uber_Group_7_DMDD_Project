@@ -298,3 +298,18 @@ VALUES (9, 7, 'Fortuner', 'Toyota', 2022, 'PLT009');
 INSERT INTO Vehicle (driver_id, ride_type_id, model, make, year, license_plate_number)
 VALUES (10, 5, 'Nexon EV', 'Tata', 2023, 'PLT010');
 COMMIT;
+
+
+-----------------------------------------
+--Checking the data in tables
+-----------------------------------------
+-- SELECT * FROM Status_Master;
+-- SELECT * FROM Payment;
+-- SELECT * FROM Customer;
+-- SELECT * FROM Ride_Type;
+-- SELECT * FROM Surge_Pricing;
+-- SELECT * FROM Driver;
+-- SELECT * FROM Trip;
+-- SELECT * FROM Trip_Status;
+-- SELECT * FROM Driver_Status;
+-- SELECT * FROM Vehicle;
