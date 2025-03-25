@@ -118,3 +118,16 @@ CREATE TABLE Trip (
     FOREIGN KEY (pricing_id) REFERENCES Surge_Pricing(surge_pricing_id),
     FOREIGN KEY (payment_id) REFERENCES Payment(payment_id)
 );
+
+-- 8. Trip_Status
+CREATE TABLE Trip_Status (
+    trip_status_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    trip_id INTEGER,
+    status_id INTEGER,
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+
+    FOREIGN KEY (trip_id) REFERENCES Trip(trip_id),
+    FOREIGN KEY (status_id) REFERENCES Status_Master(status_id)
+);
+
