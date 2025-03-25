@@ -22,3 +22,15 @@ CREATE TABLE Status_Master (
     status_type VARCHAR2(15) NOT NULL
 );
 
+-- 2. Payment
+CREATE TABLE Payment (
+    payment_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    amount NUMBER(4,2) CHECK (amount >= 0),
+    payment_method VARCHAR2(15) NOT NULL 
+        CHECK (payment_method IN ('Card', 'Cash', 'EWallet', 'UPI')),
+    transcation_date DATE DEFAULT SYSDATE,
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+);
+
