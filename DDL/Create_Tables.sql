@@ -34,3 +34,27 @@ CREATE TABLE Payment (
     updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
 );
 
+-- 3. Customer
+CREATE TABLE Customer (
+    customer_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    first_name VARCHAR2(50) NOT NULL,
+    last_name VARCHAR2(50) UNIQUE NOT NULL,
+    phone_number INTEGER UNIQUE NOT NULL,
+    email VARCHAR2(100) UNIQUE NOT NULL,
+    address_line_1 VARCHAR2(100),
+    address_line_2 VARCHAR2(100),
+    zipcode VARCHAR2(10),
+    rating NUMBER(2,1),
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+);
+
+-- 4. Ride_Type
+CREATE TABLE Ride_Type (
+    ride_type_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    type VARCHAR2(50) NOT NULL,
+    category VARCHAR2(20),
+    multiplier NUMBER(2,1)
+);
+
