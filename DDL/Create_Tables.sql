@@ -160,3 +160,4 @@ CREATE TABLE Vehicle (
     FOREIGN KEY (driver_id) REFERENCES Driver(driver_id),
     FOREIGN KEY (ride_type_id) REFERENCES Ride_Type(ride_type_id)
 );
+COMMIT;
