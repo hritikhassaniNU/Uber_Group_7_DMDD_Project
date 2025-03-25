@@ -204,3 +204,35 @@ WHERE D.LICENSE_NUMBER IS NULL
 ORDER BY D.CREATED_AT DESC;
 
 SELECT * FROM VW_DRIVERS_WITHOUT_LICENSE;
+
+-- Grant access to Customer-related views for App_Customer
+GRANT SELECT ON Application_Admin.VW_CUSTOMER_PROFILE TO App_Customer;
+GRANT SELECT ON Application_Admin.VW_CUSTOMER_TRIPS TO App_Customer;
+
+--GRANT SELECT ON APP_OWNER.VW_CUSTOMER_PROFILE TO App_Customer;
+--GRANT SELECT ON APP_OWNER.VW_CUSTOMER_TRIPS TO App_Customer;
+
+
+-- Grant access to Driver-related views for Uber_Driver
+GRANT SELECT ON Application_Admin.VW_DRIVER_TRIPS TO Uber_Driver;
+GRANT SELECT ON Application_Admin.VW_DRIVER_WEEKLY_EARNINGS TO Uber_Driver;
+
+-- Grant access to Fleet Management-related views for Fleet_Management
+GRANT SELECT ON Application_Admin.VW_DRIVER_TRIPS TO Fleet_Management;
+GRANT SELECT ON Application_Admin.VW_DRIVER_WEEKLY_EARNINGS TO Fleet_Management;
+GRANT SELECT ON Application_Admin.LOW_RATED_TRIPS TO Fleet_Management;
+GRANT SELECT ON Application_Admin.VW_DRIVERS_WITHOUT_LICENSE TO Fleet_Management;
+
+-- Grant access to Support Team-related views for Support_Team
+GRANT SELECT ON Application_Admin.VW_SUPPORT_CASES TO Support_Team;
+GRANT SELECT ON Application_Admin.LOW_RATED_TRIPS TO Support_Team;
+
+-- Grant access to all views for Application_Admin
+GRANT SELECT ON Application_Admin.VW_CUSTOMER_PROFILE TO Application_Admin;
+GRANT SELECT ON Application_Admin.VW_CUSTOMER_TRIPS TO Application_Admin;
+GRANT SELECT ON Application_Admin.VW_DRIVER_TRIPS TO Application_Admin;
+GRANT SELECT ON Application_Admin.VW_DRIVER_WEEKLY_EARNINGS TO Application_Admin;
+GRANT SELECT ON Application_Admin.VW_DRIVERS_WITHOUT_LICENSE TO Application_Admin;
+GRANT SELECT ON Application_Admin.VW_SUPPORT_CASES TO Application_Admin;
+GRANT SELECT ON Application_Admin.VW_REQUESTED_TRIPS TO Application_Admin;
+GRANT SELECT ON Application_Admin.LOW_RATED_TRIPS TO Application_Admin;
