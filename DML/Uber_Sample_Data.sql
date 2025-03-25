@@ -66,3 +66,102 @@ INSERT INTO Customer (first_name, last_name, phone_number, email, address_line_1
 VALUES('Sanya',    'Kapoor',   9876543219, 'sanya@outlook.com',    '909 Spruce Blvd',   NULL,     '02109', 4.8);
 INSERT INTO Customer (first_name, last_name, phone_number, email, address_line_1, address_line_2, zipcode, rating)
 VALUES('Vikram',   'Rao',      9876543220, 'vikram@gmail.com',   '1010 Redwood Pl',   NULL,     '02110', 4.1);
+
+-----------------------------------------------------------
+-- 4. Insert rows into Ride_Type
+-----------------------------------------------------------
+INSERT INTO Ride_Type (type, category, multiplier) VALUES ('UberX', 'Standard', 1.0);
+INSERT INTO Ride_Type (type, category, multiplier) VALUES ('UberXL', 'Premium', 1.5);
+INSERT INTO Ride_Type (type, category, multiplier) VALUES ('UberBlack', 'Luxury', 2.0);
+INSERT INTO Ride_Type (type, category, multiplier) VALUES ('UberX', 'Premium', 1.5);
+INSERT INTO Ride_Type (type, category, multiplier) VALUES ('Uber Electric', 'Green', 3);
+INSERT INTO Ride_Type (type, category, multiplier) VALUES ('Comfort', 'Standard', 1.8);
+INSERT INTO Ride_Type (type, category, multiplier) VALUES ('UberXXL', 'Luxury', 3);
+
+
+-----------------------------------------------------------
+-- 5. Insert rows into Surge_Pricing 
+-----------------------------------------------------------
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-24', 'Weekday', TO_DATE('2025-03-24 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-24 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.5);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-24', 'Weekday', TO_DATE('2025-03-24 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-24 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-24', 'Weekday', TO_DATE('2025-03-24 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-24 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.6);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-24', 'Weekday', TO_DATE('2025-03-24 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-24 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-25', 'Weekday', TO_DATE('2025-03-25 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-25 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.5);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-25', 'Weekday', TO_DATE('2025-03-25 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-25 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-25', 'Weekday', TO_DATE('2025-03-25 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-25 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.6);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-25', 'Weekday', TO_DATE('2025-03-25 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-25 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-26', 'Weekday', TO_DATE('2025-03-26 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-26 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.5);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-26', 'Weekday', TO_DATE('2025-03-26 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-26 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-26', 'Weekday', TO_DATE('2025-03-26 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-26 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.6);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-26', 'Weekday', TO_DATE('2025-03-26 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-26 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-27', 'Weekday', TO_DATE('2025-03-27 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-27 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.5);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-27', 'Weekday', TO_DATE('2025-03-27 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-27 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-27', 'Weekday', TO_DATE('2025-03-27 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-27 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.6);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-27', 'Weekday', TO_DATE('2025-03-27 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-27 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-28', 'Weekday', TO_DATE('2025-03-28 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-28 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.5);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-28', 'Weekday', TO_DATE('2025-03-28 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-28 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-28', 'Weekday', TO_DATE('2025-03-28 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-28 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.6);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-28', 'Weekday', TO_DATE('2025-03-28 19:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-28 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-29', 'Weekend', TO_DATE('2025-03-29 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-29 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.8);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-29', 'Weekend', TO_DATE('2025-03-29 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-29 17:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.1);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-29', 'Weekend', TO_DATE('2025-03-29 17:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-29 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 2.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-29', 'Weekend', TO_DATE('2025-03-29 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-29 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.2);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-30', 'Weekend', TO_DATE('2025-03-30 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-30 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 1.8);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-30', 'Weekend', TO_DATE('2025-03-30 12:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-30 17:00:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.1);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-30', 'Weekend', TO_DATE('2025-03-30 17:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-30 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), 1, 2.0);
+
+INSERT INTO Surge_Pricing (surge_date, weekday_weekend, start_time, end_time, peak_off_peak, multiplier)
+VALUES (DATE '2025-03-30', 'Weekend', TO_DATE('2025-03-30 20:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2025-03-30 23:59:00', 'YYYY-MM-DD HH24:MI:SS'), 0, 1.2);
