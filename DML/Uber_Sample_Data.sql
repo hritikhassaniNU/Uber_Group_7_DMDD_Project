@@ -249,14 +249,14 @@ VALUES (10, 5,TO_DATE('2025-03-30 15:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('
 -----------------------------------------------------------
 -- 8. Insert rows into Trip_Status
 -----------------------------------------------------------
-INSERT INTO Trip_Status (trip_id, status_id) VALUES (1, 1);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (1, 2);  
 INSERT INTO Trip_Status (trip_id, status_id) VALUES (2, 4);  
 INSERT INTO Trip_Status (trip_id, status_id) VALUES (3, 3); 
 INSERT INTO Trip_Status (trip_id, status_id) VALUES (4, 4);  
-INSERT INTO Trip_Status (trip_id, status_id) VALUES (5, 1);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (5, 2);  
 INSERT INTO Trip_Status (trip_id, status_id) VALUES (6, 2);  
 INSERT INTO Trip_Status (trip_id, status_id) VALUES (7, 4);  
-INSERT INTO Trip_Status (trip_id, status_id) VALUES (8, 1);  
+INSERT INTO Trip_Status (trip_id, status_id) VALUES (8, 2);  
 INSERT INTO Trip_Status (trip_id, status_id) VALUES (9, 3); 
 INSERT INTO Trip_Status (trip_id, status_id) VALUES (10, 4); 
 
