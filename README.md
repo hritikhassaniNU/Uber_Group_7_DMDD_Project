@@ -8,7 +8,7 @@ This project models the database of a ride-hailing platform like Uber using Orac
 
 ## 🗃️ Database Schema
 
-Final tables in the project:
+Tables in the project:
 
 - `CUSTOMER`: Stores customer details and ratings.
 - `DRIVER`: Contains driver information and licensing data.
@@ -40,11 +40,33 @@ Final tables in the project:
 
 The following views are implemented to provide **role-based and filtered access** to sensitive data. These are defined in `3_views.sql` and execute without errors.
 
-| View Name                  | Description                                                               |
-|---------------------------|----------------------------------------------------------------------------|
-| `customer_profile_view`   | Shows personal profile data for the currently logged-in customer           |
-| `customer_trip_history`   | Displays all past trips for the logged-in customer                         |
-| `driver_trip_history`     | Lists all trips a driver was assigned to (based on matching driver ID)     |
-| `cancelled_trip_history`  | Shows trips that were cancelled, viewable by admin/application admin       |
+| View Name                   | Description                                                               |
+|-----------------------------|---------------------------------------------------------------------------|
+| `VW_CUSTOMER_PROFILE`       | Shows personal profile data for the currently logged-in customer          |
+| `VW_CUSTOMER_TRIPS`         | Displays all past trips for the logged-in customer                        |
+| `VW_DRIVER_TRIPS`           | Lists all trips a driver was assigned to (based on matching driver ID)    |
+| `VW_SUPPORT_CASES`          | Shows trips that were cancelled, viewable by admin/application admin      |
+| `VW_REQUESTED_TRIPS`        | Displays requested trips for further analysis (by status)                 |
+| `LOW_RATED_TRIPS`           | Lists trips with a rating lower than 3, for review by fleet management/support teams |
+| `VW_DRIVER_WEEKLY_EARNINGS` | Shows weekly trip counts and earnings for each driver                     |
+| `VW_DRIVERS_WITHOUT_LICENSE`| Displays drivers who registered but did not provide a license number     |
+
 
 ---
+
+## Steps to Run
+
+1. **Run `Creating_Users_Grants.sql`**  
+   This will create new users and provide access to the application admin.
+
+2. **Run DDL queries with `Create_Tables.sql`**  
+   Execute this script to create the necessary tables in the database.
+
+3. **Run table-specific grants to database users by executing `Assigning_Grants_To_User_Roles.sql`**  
+   This will assign the appropriate permissions to the database users.
+
+4. **Add sample data into the database using the DML query file `Uber_Sample_Data.sql`**  
+   This will populate the database with sample data for testing purposes.
+
+5. **To run the views, execute `Uber-Views.sql`**  
+   This script will create the views and also include grants for specific database users to access those views.
