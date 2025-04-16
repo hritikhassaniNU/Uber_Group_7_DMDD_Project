@@ -21,7 +21,7 @@ END pkg_trip_request;
 -- Package Body
 
 CREATE OR REPLACE PACKAGE BODY pkg_trip_request AS
-  PROCEDURE create_trip (
+PROCEDURE create_trip (
     p_customer_id         IN NUMBER,
     p_pickup_location     IN VARCHAR2,
     p_dropoff_location    IN VARCHAR2,
@@ -29,7 +29,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_trip_request AS
     p_dropoff_zipcode     IN INTEGER,
     p_ride_type_id        IN NUMBER,
     p_trip_id             OUT NUMBER
-) IS
+  ) IS
     v_distance_miles     NUMBER(5,2);
     v_price_per_mile     NUMBER(5,2);
     v_base_fare          NUMBER(6,2);
@@ -37,13 +37,14 @@ CREATE OR REPLACE PACKAGE BODY pkg_trip_request AS
     v_total_fare         NUMBER(6,2);
     v_status_id          NUMBER(2);
     v_trip_time          TIMESTAMP := SYSTIMESTAMP;
+    v_driver_id          NUMBER;
 
     -- Custom exceptions
     ex_invalid_input      EXCEPTION;
     ex_customer_not_found EXCEPTION;
     ex_ride_type_not_found EXCEPTION;
     ex_status_not_found   EXCEPTION;
-BEGIN
+  BEGIN
     -- Input validation
     IF p_customer_id IS NULL OR p_ride_type_id IS NULL THEN
         RAISE ex_invalid_input;
@@ -92,11 +93,11 @@ BEGIN
         INSERT INTO TRIP (
             CUSTOMER_ID, PICKUP_LOCATION, DROPOFF_LOCATION,
             PICKUP_ZIPCODE, DROPOFF_ZIPCODE, DISTANCE_MILES,
-            BASE_FARE, TOTAL_FARE, CREATED_AT, LAST_UPDATED_AT, UPDATED_BY
+            BASE_FARE, TOTAL_FARE, UPDATED_BY
         ) VALUES (
             p_customer_id, p_pickup_location, p_dropoff_location,
             p_pickup_zipcode, p_dropoff_zipcode, v_distance_miles,
-            v_base_fare, v_total_fare, v_trip_time, v_trip_time, 'System'
+            v_base_fare, v_total_fare, 'SYSTEM'
         )
         RETURNING trip_id INTO p_trip_id;
     EXCEPTION
@@ -119,9 +120,9 @@ BEGIN
     -- Insert into TRIP_STATUS
     BEGIN
         INSERT INTO TRIP_STATUS (
-            STATUS_ID, TRIP_ID, CREATED_AT, LAST_UPDATED_AT
+            STATUS_ID, TRIP_ID
         ) VALUES (
-            v_status_id, p_trip_id, v_trip_time, v_trip_time
+            v_status_id, p_trip_id
         );
     EXCEPTION
         WHEN OTHERS THEN
@@ -129,10 +130,21 @@ BEGIN
             RETURN;
     END;
 
-    -- Success message
-    DBMS_OUTPUT.PUT_LINE('Trip created successfully! Trip ID: ' || p_trip_id);
+    -- Check if trip was created successfully
+    IF p_trip_id IS NOT NULL THEN
+        DBMS_OUTPUT.PUT_LINE('Trip created successfully! Trip ID: ' || p_trip_id);
 
-EXCEPTION
+        -- Assign driver to the trip
+        BEGIN
+            assign_driver_to_trip(
+                p_trip_id       => p_trip_id,
+                p_ride_type_id  => p_ride_type_id,
+                p_driver_id     => v_driver_id
+            );
+        END;
+    END IF;
+
+  EXCEPTION
     WHEN ex_invalid_input THEN
         DBMS_OUTPUT.PUT_LINE('Error: Invalid input parameters provided.');
     WHEN ex_customer_not_found THEN
@@ -143,12 +155,10 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error: Status "REQUESTED" for "TRIP" not found.');
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An unexpected error occurred: ' || SQLERRM);
-END create_trip;
-
-
-
-
+  END create_trip;
   
+  
+  -- Assigning driver to a trip
     PROCEDURE assign_driver_to_trip (
     p_trip_id       IN  NUMBER,
     p_ride_type_id  IN  NUMBER,
