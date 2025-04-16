@@ -1,15 +1,22 @@
 -- Drop tables in child-to-parent order
-DROP TABLE Trip_Status CASCADE CONSTRAINTS;
-DROP TABLE Driver_Status CASCADE CONSTRAINTS;
-DROP TABLE Vehicle CASCADE CONSTRAINTS;
-DROP TABLE Trip CASCADE CONSTRAINTS;
-DROP TABLE Surge_Pricing CASCADE CONSTRAINTS;
-DROP TABLE Payment CASCADE CONSTRAINTS;
-DROP TABLE Ride_Type CASCADE CONSTRAINTS;
-DROP TABLE Customer CASCADE CONSTRAINTS;
-DROP TABLE Driver CASCADE CONSTRAINTS;
-DROP TABLE Status_Master CASCADE CONSTRAINTS;
+SET SERVEROUTPUT ON;
 
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE Trip_Status CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Driver_Status CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Trip CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Vehicle CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Surge_Pricing CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Payment CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Ride_Type CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Customer CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Driver CASCADE CONSTRAINTS';
+  EXECUTE IMMEDIATE 'DROP TABLE Status_Master CASCADE CONSTRAINTS';
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Drop failed: ' || SQLERRM);
+END;
+/
 
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR HH24:MI:SS';
 
@@ -18,7 +25,7 @@ CREATE TABLE Status_Master (
     status_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     status VARCHAR2(15) DEFAULT 'Offline'
            CHECK (status IN ('Requested', 'completed', 'In Progress', 'cancelled', 'Available', 'Offline',
-               'On Trip','Suspended')),
+               'On Trip', 'Suspended')),
     status_type VARCHAR2(15) NOT NULL
 );
 
@@ -30,8 +37,9 @@ CREATE TABLE Payment (
         CHECK (payment_method IN ('Card', 'Cash', 'EWallet', 'UPI')),
     transcation_date DATE DEFAULT SYSDATE,
     created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+    updated_by VARCHAR2(50) DEFAULT USER
 );
 
 -- 3. Customer
@@ -46,8 +54,9 @@ CREATE TABLE Customer (
     zipcode VARCHAR2(10),
     rating NUMBER(2,1),
     created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+    updated_by VARCHAR2(50) DEFAULT USER
 );
 
 -- 4. Ride_Type
@@ -68,8 +77,9 @@ CREATE TABLE Surge_Pricing (
     peak_off_peak NUMBER(1) CHECK (peak_off_peak IN (0, 1)),
     multiplier NUMBER(2,1) NOT NULL CHECK (multiplier >= 1.0),
     created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+    updated_by VARCHAR2(50) DEFAULT USER
 );
 
 -- 6. Driver
@@ -82,15 +92,32 @@ CREATE TABLE Driver (
     license_number VARCHAR2(10) UNIQUE NOT NULL,
     rating NUMBER(2,1) CHECK (rating BETWEEN 0 AND 5),
     created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by VARCHAR2(255) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER')
+    updated_by VARCHAR2(255) DEFAULT USER
 );
 
--- 7. Trip
+-- 7. Vehicle
+CREATE TABLE Vehicle (
+    vehicle_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    driver_id INTEGER NOT NULL,
+    ride_type_id INTEGER NOT NULL,
+    model VARCHAR2(20),
+    make VARCHAR2(20) NOT NULL,
+    year INTEGER NOT NULL,
+    license_plate_number VARCHAR2(10) UNIQUE NOT NULL,
+    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
+    updated_by VARCHAR2(255) DEFAULT USER,
+    FOREIGN KEY (driver_id) REFERENCES Driver(driver_id),
+    FOREIGN KEY (ride_type_id) REFERENCES Ride_Type(ride_type_id)
+);
+
+-- 8. Trip
 CREATE TABLE Trip (
     trip_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     customer_id INTEGER NOT NULL,
-    ride_type_id INTEGER NOT NULL,
+    vehicle_id INTEGER NOT NULL,
     start_time DATE,
     end_time DATE,
     pickup_location VARCHAR2(100),
@@ -110,53 +137,40 @@ CREATE TABLE Trip (
     cancelled_by VARCHAR2(50),
     cancellation_reason VARCHAR2(400),
     created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER'),
-
+    updated_by VARCHAR2(50) DEFAULT USER,
+    
     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
-    FOREIGN KEY (ride_type_id) REFERENCES Ride_Type(ride_type_id),
+    FOREIGN KEY (vehicle_id) REFERENCES Vehicle(vehicle_id),
     FOREIGN KEY (pricing_id) REFERENCES Surge_Pricing(surge_pricing_id),
     FOREIGN KEY (payment_id) REFERENCES Payment(payment_id)
 );
 
--- 8. Trip_Status
+-- 9. Trip_Status
 CREATE TABLE Trip_Status (
     trip_status_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     trip_id INTEGER,
     status_id INTEGER,
     created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-
     FOREIGN KEY (trip_id) REFERENCES Trip(trip_id),
     FOREIGN KEY (status_id) REFERENCES Status_Master(status_id)
 );
 
--- 9. Driver_Status
+-- 10. Driver_Status
 CREATE TABLE Driver_Status (
     driver_status_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     driver_id INTEGER NOT NULL,
     status_id INTEGER NOT NULL,
     current_location INTEGER NOT NULL,
     created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by VARCHAR2(50) DEFAULT USER,
     last_updated_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by VARCHAR2(50) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER'),
-
+    updated_by VARCHAR2(50) DEFAULT USER,
     FOREIGN KEY (driver_id) REFERENCES Driver(driver_id),
     FOREIGN KEY (status_id) REFERENCES Status_Master(status_id)
 );
 
--- 10. Vehicle
-CREATE TABLE Vehicle (
-    vehicle_id INTEGER GENERATED ALWAYS AS IDENTITY ,
-    driver_id INTEGER NOT NULL,
-    ride_type_id INTEGER NOT NULL,
-    model VARCHAR2(20),
-    make VARCHAR2(20) NOT NULL,
-    year INTEGER NOT NULL,
-    license_plate_number VARCHAR2(10) UNIQUE NOT NULL,
-    created_at DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by VARCHAR2(255) DEFAULT SYS_CONTEXT('USERENV','SESSION_USER'),
-    PRIMARY KEY (vehicle_id, ride_type_id),
-    FOREIGN KEY (driver_id) REFERENCES Driver(driver_id),
-    FOREIGN KEY (ride_type_id) REFERENCES Ride_Type(ride_type_id)
-);
+COMMIT;
