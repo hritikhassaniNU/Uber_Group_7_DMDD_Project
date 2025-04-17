@@ -1,3 +1,12 @@
+create or replace PACKAGE trip_cancellation_pkg IS
+    PROCEDURE cancel_trip(
+        p_trip_id       IN Trip.trip_id%TYPE,
+        p_cancelled_by  IN VARCHAR2,
+        p_reason        IN VARCHAR2
+    );
+END trip_cancellation_pkg;
+
+-- Package Body
 CREATE OR REPLACE PACKAGE BODY trip_cancellation_pkg IS
     PROCEDURE cancel_trip(
         p_trip_id       IN Trip.trip_id%TYPE,
