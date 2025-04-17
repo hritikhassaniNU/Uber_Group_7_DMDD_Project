@@ -1,4 +1,5 @@
---CREATE OR REPLACE VIEW VW_CUSTOMER_TRIPS AS
+-- This script creates a view that provides a summary of customer trips, including customer details, trip status, and fare information.
+CREATE OR REPLACE VIEW VW_CUSTOMER_TRIPS AS
 SELECT 
     C.FIRST_NAME AS CUSTOMER_FIRST_NAME, 
     C.LAST_NAME AS CUSTOMER_LAST_NAME,
@@ -22,3 +23,6 @@ WHERE TS.LAST_UPDATED_AT = (
     FROM TRIP_STATUS TS_SUB
     WHERE TS_SUB.TRIP_ID = T.TRIP_ID
 );
+
+--test view
+--SELECT * FROM VW_CUSTOMER_TRIPS;
